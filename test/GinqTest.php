@@ -1272,6 +1272,10 @@ class GinqTest extends PHPUnit_Framework_TestCase
                 )
             ),
             array(
+                'name'   => 'Jiro',
+                'phones' => array()
+            ),
+            array(
                 'name'   => 'Atsushi',
                 'phones' => array(
                     '050-1198-4458'

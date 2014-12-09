@@ -104,7 +104,7 @@ class SelectManyIterator implements \Iterator
 
     protected function fetchOuter()
     {
-        if ($this->outer->valid()) {
+        while ($this->outer->valid()) {
             $this->outerV = $this->outer->current();
             $this->outerK = $this->outer->key();
             $this->inner = IteratorUtil::iterator(
@@ -113,9 +113,14 @@ class SelectManyIterator implements \Iterator
                     $this->outerK
                 )
             );
-        } else {
-            $this->inner = null;
+            $this->inner->rewind();
+            if ($this->inner->valid()) {
+                return;
+            }
+            $this->outer->next();
         }
+
+        $this->inner = null;
     }
 
     protected function fetchInner()
